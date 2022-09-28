@@ -3,9 +3,19 @@
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
 
+#ifdef CONFIG_SECURITY_SELINUX_PERMISSIVE
+#include <asm/setup.h>
+
+static char proc_cmdline[COMMAND_LINE_SIZE];
+#endif
+
 static int cmdline_proc_show(struct seq_file *m, void *v)
 {
+	#ifdef CONFIG_SECURITY_SELINUX_PERMISSIVE
+	seq_printf(m, "%s\n", proc_cmdline);
+#else
 	seq_printf(m, "%s\n", saved_command_line);
+#endif
 	return 0;
 }
 
