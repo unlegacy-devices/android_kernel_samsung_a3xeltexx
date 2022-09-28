@@ -18,6 +18,7 @@ jobs:
     - name: Building Kernel
       run: |
         make -j16 ARCH=arm64 lineageos_a3xelte_defconfig
+        make -j16
     - name: Moving Output # CI only
       run: |
         mkdir -p /home/runner/work/output
